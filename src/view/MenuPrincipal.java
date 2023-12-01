@@ -96,6 +96,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu6.add(jMenuCadProced);
 
         jMenuCadColab.setText("COLABORADOR");
+        jMenuCadColab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadColabActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuCadColab);
 
         jMenuBar2.add(jMenu6);
@@ -160,9 +165,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItemRelClieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelClieActionPerformed
         // TODO add your handling code here:
         Principal.clientes = Principal.clienteDao.getListaCliente();
-        if(Principal.clientes.isEmpty()){
+        if (Principal.clientes.isEmpty()) {
             Alexa.escrevaJanela("Não existe nenhum cliente cadastrado ");
-        }else{
+        } else {
             RelClie relclie = new RelClie();
             relclie.setLocationRelativeTo(null);
             relclie.setVisible(true);
@@ -174,6 +179,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(WIDTH);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuCadColabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadColabActionPerformed
+        // TODO add your handling code here:
+        CadColab objtelacadcolab = new CadColab();
+        objtelacadcolab.setVisible(true);
+    }//GEN-LAST:event_jMenuCadColabActionPerformed
 
     /**
      * @param args the command line arguments

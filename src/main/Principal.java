@@ -1,9 +1,11 @@
 package main;
 
 import controller.ClienteDao;
+import controller.ColaboradorDao;
 import controller.InsumoDao;
 import controller.ProcedimentoDao;
 import entidade.Cliente;
+import entidade.Colaborador;
 import entidade.Insumo;
 import entidade.Procedimento;
 import java.util.ArrayList;
@@ -22,6 +24,10 @@ public class Principal {
     public static Procedimento procedimento = new Procedimento();
     public static ProcedimentoDao procedimentoDao = new ProcedimentoDao();
     public static ArrayList<Procedimento> procedimentos = new ArrayList<Procedimento>();
+    
+    public static Colaborador colaborador = new Colaborador();
+    public static ColaboradorDao colaboradorDao = new ColaboradorDao();
+    public static ArrayList<Colaborador> colaboradores = new ArrayList<Colaborador>();
     
     public static void main(String[] args) {
         //CadCliente objviewcadcliente = new CadCliente();

@@ -191,6 +191,13 @@ public class CadProced extends javax.swing.JFrame {
 
     private void jButtonInaproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInaproActionPerformed
         // TODO add your handling code here:
+        Principal.procedimento.setIdProcedimento(Integer.parseInt(jCodpro.getText()));
+        boolean inativar = Principal.procedimentoDao.inativar(Principal.procedimento.getIdProcedimento());
+        if (inativar) {
+            Alexa.escrevaJanela("Procedimento inativado com sucesso");
+        } else {
+            Alexa.escrevaJanela("Procedimento não encontrado!");
+        }
     }//GEN-LAST:event_jButtonInaproActionPerformed
 
     /**

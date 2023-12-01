@@ -304,6 +304,14 @@ public class CadCliente extends javax.swing.JFrame {
 
     private void jButtonInativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInativarActionPerformed
         // TODO add your handling code here:
+        Principal.cliente.setIdCliente(Integer.parseInt(jCodigo.getText()));
+        boolean inativar = Principal.clienteDao.inativar(Principal.cliente.getIdCliente());
+        if (inativar) {
+            Alexa.escrevaJanela("Cliente inativado com sucesso!");
+            limparCampos();
+        } else {
+            Alexa.escrevaJanela("Cliente não encontrado!");
+        }
     }//GEN-LAST:event_jButtonInativarActionPerformed
 
     /**

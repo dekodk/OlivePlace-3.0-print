@@ -73,6 +73,7 @@ public class ColaboradorDao {
             pstm.setString(2, colaborador.getIdSenha());
             pstm.setString(3, colaborador.getNomeUser());
             pstm.setInt(4, colaborador.getUserNivel());
+            pstm.setInt(4, colaborador.getIdUser());
             
 
             int linhas = pstm.executeUpdate();

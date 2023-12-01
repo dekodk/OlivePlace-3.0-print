@@ -193,6 +193,13 @@ public class CadInsumo extends javax.swing.JFrame {
 
     private void jButtonInativarInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInativarInsActionPerformed
         // TODO add your handling code here:
+        Principal.insumo.setIdInsumo(Integer.parseInt(jCodigoin.getText()));
+        boolean inativar = Principal.insumoDao.inativar(Principal.insumo.getIdInsumo());
+        if (inativar) {
+            Alexa.escrevaJanela("Insumo inativado com sucesso!");
+        } else {
+            Alexa.escrevaJanela("Insumo não encontrado!");
+        }
     }//GEN-LAST:event_jButtonInativarInsActionPerformed
 
     /**
