@@ -192,11 +192,11 @@ public class ClienteDao {
     public ArrayList<Cliente> getListaCliente() {
         
         Cliente cliente = new Cliente();
-        ArrayList<Cliente> alunos = new ArrayList<Cliente>();
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
         Connection conexao = (Connection) FabricaConexao.getConnection();
         try {
             
-            PreparedStatement pstm = (PreparedStatement) conexao.prepareStatement("SELECT * from cliente where ativo=1;");
+            PreparedStatement pstm = (PreparedStatement) conexao.prepareStatement("SELECT * from cliente where ativo=1 order by nomeCliente;");
  
             ResultSet rs = pstm.executeQuery();
             

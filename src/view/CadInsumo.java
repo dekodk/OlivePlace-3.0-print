@@ -170,8 +170,8 @@ public class CadInsumo extends javax.swing.JFrame {
         Principal.insumo.setIdInsumo(Integer.parseInt(jCodigoin.getText()));
         Principal.insumo.setNomeInsumo(jNomein.getText());
         
-        boolean cadastrou = Principal.insumoDao.atualizar(Principal.insumo);
-        if (cadastrou){
+        boolean atualizou = Principal.insumoDao.atualizar(Principal.insumo);
+        if (atualizou){
             Alexa.escrevaJanela("Insumo atualizado com sucesso!");
             limparCampos();
         }else{

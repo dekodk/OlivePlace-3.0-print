@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
+import javax.swing.JRadioButton;
 import main.Principal;
 import util.Alexa;
 
@@ -29,6 +26,7 @@ public class CadColab extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -39,8 +37,8 @@ public class CadColab extends javax.swing.JFrame {
         jLogincolab = new javax.swing.JTextField();
         jSenhacolab = new javax.swing.JTextField();
         jNomecolab = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButtonAdmin = new javax.swing.JRadioButton();
+        jRadioButtonUser = new javax.swing.JRadioButton();
         jButtonCadcolab = new javax.swing.JButton();
         jButtonattcolab = new javax.swing.JButton();
         jButtonBusccolab = new javax.swing.JButton();
@@ -68,9 +66,16 @@ public class CadColab extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton1.setText("ADMINISTRADOR");
+        buttonGroup1.add(jRadioButtonAdmin);
+        jRadioButtonAdmin.setText("ADMINISTRADOR");
+        jRadioButtonAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonAdminActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("USUÁRIO");
+        buttonGroup1.add(jRadioButtonUser);
+        jRadioButtonUser.setText("USUÁRIO");
 
         jButtonCadcolab.setText("CADASTRAR");
         jButtonCadcolab.addActionListener(new java.awt.event.ActionListener() {
@@ -127,13 +132,13 @@ public class CadColab extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jRadioButton1)
+                                            .addComponent(jRadioButtonAdmin)
                                             .addGap(41, 41, 41))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                             .addComponent(jButtonattcolab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(20, 20, 20)))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jRadioButtonUser, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jButtonBusccolab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                                     .addComponent(jButtonInativacolab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
@@ -164,8 +169,8 @@ public class CadColab extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jRadioButton1)
-                        .addComponent(jRadioButton2)))
+                        .addComponent(jRadioButtonAdmin)
+                        .addComponent(jRadioButtonUser)))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCadcolab)
@@ -184,14 +189,18 @@ public class CadColab extends javax.swing.JFrame {
 
     private void jButtonCadcolabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadcolabActionPerformed
         // TODO add your handling code here:
-        if (jLogincolab.getText().matches("") || jSenhacolab.getText().matches("") || jNomecolab.getText().matches("")) {
-            Alexa.escrevaJanela("Preencha os campos LOGIN, SENHA e NOME!");
+        if (jLogincolab.getText().matches("") || jSenhacolab.getText().matches("") || jNomecolab.getText().matches("") || (!jRadioButtonAdmin.isSelected() && !jRadioButtonUser.isSelected())) {
+            Alexa.escrevaJanela("Verifique se os campos LOGIN, SENHA e NOME estão preenchidos e selecione o nível do usuário!");
         } else {
-
             Principal.colaborador.setIdLogin(jLogincolab.getText());
             Principal.colaborador.setIdSenha(jSenhacolab.getText());
             Principal.colaborador.setNomeUser(jNomecolab.getText());
-            Principal.colaborador.setUserNivel(HEIGHT);
+            
+            if (jRadioButtonAdmin.isSelected()) {
+                Principal.colaborador.setUserNivel(1);
+            } else if (jRadioButtonUser.isSelected()) {
+                Principal.colaborador.setUserNivel(2);
+            }
 
             boolean cadastrou = Principal.colaboradorDao.inserir(Principal.colaborador);
             if (cadastrou) {
@@ -201,6 +210,7 @@ public class CadColab extends javax.swing.JFrame {
                 Alexa.escrevaJanela("Falha ao cadastrar colaborador!");
             }
         }
+
     }//GEN-LAST:event_jButtonCadcolabActionPerformed
 
     private void jButtonattcolabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonattcolabActionPerformed
@@ -214,7 +224,6 @@ public class CadColab extends javax.swing.JFrame {
             Principal.colaborador.setIdSenha(jSenhacolab.getText());
             //Principal.colaborador.setUserNivel(Integer.parseInt(s));
             Principal.colaborador.setNomeUser(jNomecolab.getText());
-            
 
             boolean cadastrou = Principal.colaboradorDao.atualizar(Principal.colaborador);
             if (cadastrou) {
@@ -226,10 +235,14 @@ public class CadColab extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonattcolabActionPerformed
 
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+    private void jRadioButtonAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonAdminActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -241,27 +254,23 @@ public static void main(String args[]) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadColab.class  
+            java.util.logging.Logger.getLogger(CadColab.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CadColab.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadColab.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CadColab.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadColab.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadColab.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CadColab.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editojButtonCadcolab
         /* Create and display the form */
@@ -273,6 +282,7 @@ public static void main(String args[]) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonBusccolab;
     private javax.swing.JButton jButtonCadcolab;
     private javax.swing.JButton jButtonInativacolab;
@@ -286,8 +296,8 @@ public static void main(String args[]) {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField jLogincolab;
     private javax.swing.JTextField jNomecolab;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButtonAdmin;
+    private javax.swing.JRadioButton jRadioButtonUser;
     private javax.swing.JTextField jSenhacolab;
     // End of variables declaration//GEN-END:variables
 private void limparCampos() {
@@ -295,6 +305,7 @@ private void limparCampos() {
         jLogincolab.setText("");
         jSenhacolab.setText("");
         jNomecolab.setText("");
-        
+
     }
+
 }

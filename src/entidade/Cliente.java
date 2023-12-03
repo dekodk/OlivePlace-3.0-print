@@ -13,7 +13,7 @@ public class Cliente {
     private String bairroCliente;
     private String cidCliente;
     
-    //no banco de dados todo user está como o campo "ativo" marcado como 1 por default (adicionado automaticamente).
+    //no banco de dados toda variavel está como o campo "ativo" marcado como 1 por default (adicionado automaticamente).
     //Por isso nao consta no sistema como campo para ser cadastrado, apenas atualizado quando for fazer inativação.
     //1 = ativo
     //0 = inativo
