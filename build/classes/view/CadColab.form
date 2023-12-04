@@ -226,6 +226,9 @@
           <Dimension value="[97, 23]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBusccolabActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonInativacolab">
       <Properties>
@@ -240,6 +243,9 @@
           <Dimension value="[97, 23]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInativacolabActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
