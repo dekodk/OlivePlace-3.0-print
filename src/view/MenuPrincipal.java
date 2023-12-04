@@ -65,6 +65,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu5.setText("AGENDAR");
 
         jMenuItem1.setText("AGENDAMENTOS");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem1);
 
         jMenuBar2.add(jMenu5);
@@ -185,6 +190,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         CadColab objtelacadcolab = new CadColab();
         objtelacadcolab.setVisible(true);
     }//GEN-LAST:event_jMenuCadColabActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        Agenda objagendae = new Agenda();
+        objagendae.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments

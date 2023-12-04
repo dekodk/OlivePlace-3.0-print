@@ -73,7 +73,7 @@ public class ColaboradorDao {
             pstm.setString(2, colaborador.getIdSenha());
             pstm.setString(3, colaborador.getNomeUser());
             pstm.setInt(4, colaborador.getUserNivel());
-            pstm.setInt(4, colaborador.getIdUser());
+            pstm.setInt(5, colaborador.getIdUser());
             
 
             int linhas = pstm.executeUpdate();
@@ -106,7 +106,7 @@ public class ColaboradorDao {
 
             while (rs.next()) {
                 colaborador = new Colaborador();
-                colaborador.setIdUser(rs.getInt("idUser"));
+                colaborador.setIdLogin(rs.getString("idLogin"));
                 colaborador.setIdSenha(rs.getString("idSenha"));
                 colaborador.setNomeUser(rs.getString("nomeUser"));
                 colaborador.setIdUser(rs.getInt("idUser"));  

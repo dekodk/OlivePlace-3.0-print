@@ -98,11 +98,21 @@ public class CadColab extends javax.swing.JFrame {
         jButtonBusccolab.setMaximumSize(new java.awt.Dimension(97, 23));
         jButtonBusccolab.setMinimumSize(new java.awt.Dimension(97, 23));
         jButtonBusccolab.setPreferredSize(new java.awt.Dimension(97, 23));
+        jButtonBusccolab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBusccolabActionPerformed(evt);
+            }
+        });
 
         jButtonInativacolab.setText("INATIVAR");
         jButtonInativacolab.setMaximumSize(new java.awt.Dimension(97, 23));
         jButtonInativacolab.setMinimumSize(new java.awt.Dimension(97, 23));
         jButtonInativacolab.setPreferredSize(new java.awt.Dimension(97, 23));
+        jButtonInativacolab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInativacolabActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,7 +205,7 @@ public class CadColab extends javax.swing.JFrame {
             Principal.colaborador.setIdLogin(jLogincolab.getText());
             Principal.colaborador.setIdSenha(jSenhacolab.getText());
             Principal.colaborador.setNomeUser(jNomecolab.getText());
-            
+
             if (jRadioButtonAdmin.isSelected()) {
                 Principal.colaborador.setUserNivel(1);
             } else if (jRadioButtonUser.isSelected()) {
@@ -215,15 +225,20 @@ public class CadColab extends javax.swing.JFrame {
 
     private void jButtonattcolabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonattcolabActionPerformed
         // TODO add your handling code here:
-        if (jLogincolab.getText().matches("") || jSenhacolab.getText().matches("") || jNomecolab.getText().matches("")) {
-            Alexa.escrevaJanela("Preencha os campos LOGIN, SENHA e NOME!");
+        if (jLogincolab.getText().matches("") || jSenhacolab.getText().matches("") || jNomecolab.getText().matches("") || (!jRadioButtonAdmin.isSelected() && !jRadioButtonUser.isSelected())) {
+            Alexa.escrevaJanela("Verifique se os campos LOGIN, SENHA e NOME estão preenchidos e selecione o nível do usuário!");
         } else {
 
             Principal.colaborador.setIdUser(Integer.parseInt(jCodcolab.getText()));
             Principal.colaborador.setIdLogin(jLogincolab.getText());
             Principal.colaborador.setIdSenha(jSenhacolab.getText());
-            //Principal.colaborador.setUserNivel(Integer.parseInt(s));
             Principal.colaborador.setNomeUser(jNomecolab.getText());
+
+            if (jRadioButtonAdmin.isSelected()) {
+                Principal.colaborador.setUserNivel(1);
+            } else if (jRadioButtonUser.isSelected()) {
+                Principal.colaborador.setUserNivel(2);
+            }
 
             boolean cadastrou = Principal.colaboradorDao.atualizar(Principal.colaborador);
             if (cadastrou) {
@@ -238,6 +253,38 @@ public class CadColab extends javax.swing.JFrame {
     private void jRadioButtonAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAdminActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonAdminActionPerformed
+
+    private void jButtonBusccolabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBusccolabActionPerformed
+        // TODO add your handling code here:
+        Principal.colaborador.setIdUser(Integer.parseInt(jCodcolab.getText()));
+        Principal.colaborador = Principal.colaboradorDao.buscar(Principal.colaborador.getIdUser());
+
+        if (Principal.colaborador == null || Principal.colaborador.getNomeUser() == null) {
+            Alexa.escrevaJanela("Nenhum colaborador encontrado com este código!");
+        } else {
+            jLogincolab.setText(Principal.colaborador.getIdLogin());
+            jSenhacolab.setText(Principal.colaborador.getIdSenha());
+            jNomecolab.setText(Principal.colaborador.getNomeUser());
+
+            if (Principal.colaborador.getUserNivel() == 1) {
+                jRadioButtonAdmin.setSelected(true);
+            } else if (Principal.colaborador.getUserNivel() == 2) {
+                jRadioButtonUser.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_jButtonBusccolabActionPerformed
+
+    private void jButtonInativacolabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInativacolabActionPerformed
+        // TODO add your handling code here:
+        Principal.colaborador.setIdUser(Integer.parseInt(jCodcolab.getText()));
+        boolean inativar = Principal.colaboradorDao.inativar(Principal.colaborador.getIdUser());
+        if (inativar) {
+            Alexa.escrevaJanela("Colaborador inativado com sucesso!");
+            limparCampos();
+        } else {
+            Alexa.escrevaJanela("Colaborador não encontrado!");
+        }
+    }//GEN-LAST:event_jButtonInativacolabActionPerformed
 
     /**
      * @param args the command line arguments
